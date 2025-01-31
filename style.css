@@ -1,18 +1,23 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ffe6f2;
+    background-color: #484148; /* สีพื้นหลังมือดๆ */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    transition: background-color 2s ease; /* เพิ่มการเปลี่ยนแปลงสีพื้นหลัง */
 }
 
 .card {
     width: 300px;
     height: 400px;
     position: relative;
-    perspective: 1000px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 1s ease;
 }
 
 .cover, .inside {
@@ -21,20 +26,24 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    backface-visibility: hidden;
-    transition: transform 1s;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.cover {
-    background-color: #ffb6c1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    transform: rotateY(0deg);
+    transition: all 1s ease;
+}
+
+.cover {
+    background-color: #ffb6c1;
+    z-index: 2;
+}
+
+.cover img.birthday-person {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
 }
 
 .cover h1 {
@@ -51,18 +60,20 @@ body {
 
 .inside {
     background-color: #fff;
-    transform: rotateY(180deg);
-    display: flex;
-    padding: 20px;
-    box-sizing: border-box;
+    z-index: 1;
+    flex-direction: row;
+    opacity: 0;
+    transform: translateX(100%);
 }
 
 .left, .right {
     width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .left img {
-    width: 100%;
+    width: 75%;
     border-radius: 10px;
 }
 
@@ -80,8 +91,8 @@ body {
 }
 
 .your-photo {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -92,10 +103,167 @@ body {
     text-align: center;
 }
 
+.card.open {
+    width: 600px;
+    height: 300px;
+}
+
 .card.open .cover {
-    transform: rotateY(180deg);
+    opacity: 0;
+    transform: translateX(-100%);
 }
 
 .card.open .inside {
-    transform: rotateY(360deg);
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* เอฟเฟกต์ลูกโป่ง */
+.balloons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    bottom: -100px;
+    animation: floatUp 5s ease-in infinite;
+}
+
+.balloon1 {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.balloon2 {
+    left: 50%;
+    animation-delay: 1s;
+}
+
+.balloon3 {
+    left: 70%;
+    animation-delay: 4s;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+    }
+}
+
+.inside {
+    position: relative;
+    border: 2px solid #ffb6c1;
+    border-radius: 15px 50px;
+    box-shadow: 
+      0 0 0 4px #fff,
+      0 0 0 20px #ff899a;
+}
+
+/* เอฟเฟกต์การเปลี่ยนสีพื้นหลัง */
+body.card-opened {
+    background-color: #ffb6c1; /* สีชมพู */
+}
+
+/* เอฟเฟกต์ใบวันเกิดกระจาย */
+.confetti-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 170%;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    animation: confetti 4s ease-in infinite;
+}
+
+.confetti:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.confetti:nth-child(2) {
+    top: 20%;
+    left: 50%;
+    animation-delay: 0.5s;
+}
+
+.confetti:nth-child(3) {
+    top: 30%;
+    left: 70%;
+    animation-delay: 1s;
+}
+
+.confetti:nth-child(4) {
+    top: 40%;
+    left: 10%;
+    animation-delay: 1.5s;
+}
+
+.confetti:nth-child(5) {
+    top: 50%;
+    left: 90%;
+    animation-delay: 2s;
+}
+
+.confetti:nth-child(6) {
+    top: 60%;
+    left: 30%;
+    animation-delay: 2.5s;
+}
+
+.confetti:nth-child(7) {
+    top: 70%;
+    left: 60%;
+    animation-delay: 3s;
+}
+
+.confetti:nth-child(8) {
+    top: 80%;
+    left: 80%;
+    animation-delay: 3.5s;
+}
+
+.confetti:nth-child(9) {
+    top: 90%;
+    left: 40%;
+    animation-delay: 4s;
+}
+
+.confetti:nth-child(10) {
+    top: 100%;
+    left: 70%;
+    animation-delay: 4.5s;
+}
+
+@keyframes confetti {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50vh) rotate(360deg);
+        opacity: 0;
+    }
 }
